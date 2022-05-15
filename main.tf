@@ -7,6 +7,13 @@ terraform {
   }
 }
 
+backend "azurerm" {
+        #resource_group_name  = "dowd-devops-rg"
+        #storage_account_name = "dowdtf"
+        #container_name       = "tfstatedowd"
+        #key                  = "terraform.tfstate"
+    }
+
 
 provider "azurerm" {
   # Configuration options
