@@ -1,18 +1,20 @@
+
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = ">=3.0.0"
     }
   }
-}
-
-backend "azurerm" {
+    backend "azurerm" {
         #resource_group_name  = "dowd-devops-rg"
         #storage_account_name = "dowdtf"
         #container_name       = "tfstatedowd"
         #key                  = "terraform.tfstate"
     }
+
+}
+
 
 
 provider "azurerm" {
