@@ -21,4 +21,4 @@ steps:
 - script: |
     echo Hey this is my project piyu.
     echo See pniku singu
-  displayName: 'Run a multi-line script'
+  displayName: 'Run new'
