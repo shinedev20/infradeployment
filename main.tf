@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "rg0123" {
   location = var.location
   name     = join("-", [var.env, var.reg, var.dom,"rg",var.index])
 }
-/*
+
 
 resource "azurerm_virtual_network" "vnet" {
   name                = join("-", [var.env, var.reg, var.dom,"vnet",var.index])
@@ -94,7 +94,4 @@ resource "azurerm_storage_account" "stg1" {
   name                     = join("", [var.env, var.reg, var.dom, "stg", var.index1])
   resource_group_name      = azurerm_resource_group.rg013.name
 }
-
-*/
-
 
