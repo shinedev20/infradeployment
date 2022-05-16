@@ -1,8 +1,3 @@
-- task: TerraformTaskV2@2
-  inputs:
-    provider: 'azurerm'
-    command: 'destroy'
-    environmentServiceNameAzureRM: 'CSP-Dev-M&C(PRJ-6965)-Vivek Chaturvedi(3e357a00-39fc-400a-9d54-dcec7ed20bb4)'
 
 trigger:
 - main
@@ -35,4 +30,9 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
+    environmentServiceNameAzureRM: 'CSP-Dev-M&C(PRJ-6965)-Vivek Chaturvedi(3e357a00-39fc-400a-9d54-dcec7ed20bb4)'
+- task: TerraformTaskV2@2
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'
     environmentServiceNameAzureRM: 'CSP-Dev-M&C(PRJ-6965)-Vivek Chaturvedi(3e357a00-39fc-400a-9d54-dcec7ed20bb4)'
