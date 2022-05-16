@@ -118,7 +118,7 @@ resource "azurerm_storage_account" "stg1" {
 resource "azurerm_storage_account_network_rules" "test" {
   storage_account_id = azurerm_storage_account.stg1.id
 
-  default_action             = "Allow"
+  default_action             = "Deny"
   ip_rules                   = ["127.0.0.1"]
   virtual_network_subnet_ids = [azurerm_subnet.subnet.id,azurerm_subnet.subnet1.id]
   bypass                     = ["Metrics"]
