@@ -43,12 +43,21 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
+output "subnet" {
+  value = "azurerm_subnet.subnet.id"
+}
+
 resource "azurerm_subnet" "subnet1" {
   name                 = join("-", [var.env, var.reg, var.dom,"subnet",var.index1])
   resource_group_name  = azurerm_resource_group.rg0123.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
 }
+output "subnet1" {
+  value = "azurerm_subnet.subnet1.id"
+}
+
+
 /*
 
 resource "azurerm_network_interface" "nic" {
