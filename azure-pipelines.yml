@@ -30,10 +30,12 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'infra_azure_connection'
+- task: TerraformTaskV2@2
+  displayName: 'terraform destroy'
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'
+    environmentServiceNameAzureRM: 'infra_azure_connection'
     
-# - task: TerraformTaskV2@2
-#    displayName: 'terraform destroy'
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'destroy'
-#     environmentServiceNameAzureRM: 'CSP-Dev-M&C(PRJ-6965)-Vivek Chaturvedi(3e357a00-39fc-400a-9d54-dcec7ed20bb4)'
+    
+ 
