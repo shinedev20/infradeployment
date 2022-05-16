@@ -42,6 +42,10 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = azurerm_resource_group.rg0123.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
+  service_resources = [
+      azurerm_resource_group.rg0123.id,
+      azurerm_storage_account.stg1.id
+    ]
 }
 output "subnet" {
   value = "azurerm_subnet.subnet.id"
@@ -52,6 +56,10 @@ resource "azurerm_subnet" "subnet1" {
   resource_group_name  = azurerm_resource_group.rg0123.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
+  service_resources = [
+      azurerm_resource_group.rg0123.id,
+      azurerm_storage_account.stg1.id
+    ]
 }
 output "subnet1" {
   value = "azurerm_subnet.subnet1.id"
