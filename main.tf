@@ -23,6 +23,8 @@ provider "azurerm" {
 }
 
 # creating resource group
+
+/*
 resource "azurerm_resource_group" "rg0123" {
 
   location = var.location
@@ -62,7 +64,7 @@ output "subnet1" {
 }
 
 
-/*
+
 
 resource "azurerm_network_interface" "nic" {
   name                = join("-", [var.env, var.reg, var.dom,"nic",var.index])
@@ -100,7 +102,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   }
 }
 
-*/
+
 
 resource "azurerm_resource_group" "rg013" {
 
@@ -108,7 +110,7 @@ resource "azurerm_resource_group" "rg013" {
   name     = join("-", [var.env, var.reg, var.dom,"rg",var.index1])
 }
 
-/*
+
 resource "azurerm_storage_account" "stg1" {
   account_replication_type = "LRS"
   account_tier             = "Standard"
@@ -156,7 +158,7 @@ resource "azurerm_postgresql_database" "psqldb" {
   charset             = "UTF8"
   collation           = "English_United States.1252"
 }
-*/
+
 
 resource "azurerm_user_assigned_identity" "mi" {
   resource_group_name = azurerm_resource_group.rg0123.name
@@ -227,6 +229,8 @@ resource "azurerm_key_vault" "example" {
     ]
   }
 }
+*/
+
 
 
 
