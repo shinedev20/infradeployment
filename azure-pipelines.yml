@@ -31,12 +31,12 @@ steps:
     command: 'apply'
     environmentServiceNameAzureRM: 'infra_azure_connection'
 
-- task: TerraformTaskV2@2
-  displayName: 'terraform destroy'
-  inputs:
-    provider: 'azurerm'
-    command: 'destroy'
-    environmentServiceNameAzureRM: 'infra_azure_connection'
+# - task: TerraformTaskV2@2
+#   displayName: 'terraform destroy'
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'destroy'
+#     environmentServiceNameAzureRM: 'infra_azure_connection'
     
     
  
