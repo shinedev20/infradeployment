@@ -137,17 +137,19 @@ resource "azurerm_postgresql_server" "psql" {
   location            = var.location
   resource_group_name = azurerm_resource_group.rg0123.name
 
-  sku_name = "B_Gen5_2"
+  sku_name   = "GP_Gen5_4"
 
-  storage_mb                   = 5120
+  storage_mb = 640000
   backup_retention_days        = 7
-  geo_redundant_backup_enabled = false
+  geo_redundant_backup_enabled = true
   auto_grow_enabled            = true
 
   administrator_login          = var.adminlogin
   administrator_login_password = var.loginpassword
-  version                      = "9.5"
-  ssl_enforcement_enabled      = true
+  version                      = "11"
+  public_network_access_enabled    = false
+  ssl_enforcement_enabled          = true
+  ssl_minimal_tls_version_enforced = "TLS1_2"
 }
 
 resource "azurerm_postgresql_database" "psqldb" {
@@ -164,6 +166,7 @@ resource "azurerm_postgresql_firewall_rule" "psqlfw" {
   start_ip_address    = "40.112.8.12"
   end_ip_address      = "40.112.8.12"
 }
+
 
 
 
