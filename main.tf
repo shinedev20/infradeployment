@@ -114,6 +114,7 @@ resource "azurerm_storage_account" "stg1" {
   location                 = var.location
   name                     = join("", [var.env, var.reg, var.dom, "stg", var.index1])
   resource_group_name      = azurerm_resource_group.rg013.name
+  depends_on = [azurerm_resource_group.rg013,azurerm_virtual_network.vnet]
 }
 resource "azurerm_storage_account_network_rules" "test" {
   storage_account_id = azurerm_storage_account.stg1.id
