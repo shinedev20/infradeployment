@@ -165,6 +165,16 @@ resource "azurerm_user_assigned_identity" "mi" {
   name = join("-", [var.env, var.reg,"mi"])
 }
 
+output "uai_client_id" {
+  value = azurerm_user_assigned_identity.mi.client_id
+}
+
+output "uai_principal_id" {
+  value = azurerm_user_assigned_identity.mi.principal_id
+}
+
+
+
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "example" {
@@ -199,7 +209,7 @@ resource "azurerm_key_vault" "example" {
   }
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = azurerm_user_assigned_identity.mi.id
+    object_id = azurerm_user_assigned_identity.mi.client_id
 
     key_permissions = [
       "Get",
