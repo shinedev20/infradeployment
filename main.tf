@@ -108,6 +108,7 @@ resource "azurerm_resource_group" "rg013" {
   name     = join("-", [var.env, var.reg, var.dom,"rg",var.index1])
 }
 
+/*
 resource "azurerm_storage_account" "stg1" {
   account_replication_type = "LRS"
   account_tier             = "Standard"
@@ -160,13 +161,41 @@ resource "azurerm_postgresql_database" "psqldb" {
   charset             = "UTF8"
   collation           = "English_United States.1252"
 }
-/*resource "azurerm_postgresql_firewall_rule" "psqlfw" {
-  name                = "office"
-  resource_group_name = azurerm_resource_group.rg0123.name
-  server_name         = azurerm_postgresql_server.psql.name
-  start_ip_address    = "40.112.8.12"
-  end_ip_address      = "40.112.8.12"
-}*/
+*/
+
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_key_vault" "example" {
+  name                        = "tesbkeyvault"
+  location                    = azurerm_resource_group.rg0123.location
+  resource_group_name         = azurerm_resource_group.rg0123.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
+
+  sku_name = "standard"
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions = [
+      "Get",
+    ]
+
+    secret_permissions = [
+      "Get",
+    ]
+
+    storage_permissions = [
+      "Get",
+    ]
+    certificate_permissions = [
+       "Get",
+    ]
+  }
+}
 
 
 
