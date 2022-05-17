@@ -147,7 +147,7 @@ resource "azurerm_postgresql_server" "psql" {
   administrator_login          = var.adminlogin
   administrator_login_password = var.loginpassword
   version                      = "11"
-  public_network_access_enabled    = false
+  public_network_access_enabled    = true
   #deny_public_network_access = true
   ssl_enforcement_enabled          = true
   ssl_minimal_tls_version_enforced = "TLS1_2"
