@@ -125,12 +125,7 @@ resource "azurerm_storage_account_network_rules" "test" {
   virtual_network_subnet_ids = [azurerm_subnet.subnet.id,azurerm_subnet.subnet1.id]
   bypass                     = ["Metrics"]
 }
-resource "azurerm_user_assigned_identity" "example" {
-  resource_group_name = azurerm_resource_group.rg0123.name
-  location            = var.location
 
-  name = join("-", [var.env, var.reg,"mi"])
-}
 
 
 resource "azurerm_postgresql_server" "psql" {
@@ -163,6 +158,13 @@ resource "azurerm_postgresql_database" "psqldb" {
 }
 */
 
+resource "azurerm_user_assigned_identity" "mi" {
+  resource_group_name = azurerm_resource_group.rg0123.name
+  location            = var.location
+
+  name = join("-", [var.env, var.reg,"mi"])
+}
+
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "example" {
@@ -179,6 +181,25 @@ resource "azurerm_key_vault" "example" {
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions = [
+      "Get",
+    ]
+
+    secret_permissions = [
+      "Get",
+    ]
+
+    storage_permissions = [
+      "Get",
+    ]
+    certificate_permissions = [
+       "Get",
+    ]
+  }
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = azurerm_user_assigned_identity.mi.id
 
     key_permissions = [
       "Get",
