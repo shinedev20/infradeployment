@@ -147,7 +147,8 @@ resource "azurerm_postgresql_server" "psql" {
   administrator_login          = var.adminlogin
   administrator_login_password = var.loginpassword
   version                      = "11"
-  public_network_access_enabled    = false
+  #public_network_access_enabled    = false
+  deny_public_network_access = true
   ssl_enforcement_enabled          = true
   ssl_minimal_tls_version_enforced = "TLS1_2"
 }
@@ -159,13 +160,13 @@ resource "azurerm_postgresql_database" "psqldb" {
   charset             = "UTF8"
   collation           = "English_United States.1252"
 }
-resource "azurerm_postgresql_firewall_rule" "psqlfw" {
+/*resource "azurerm_postgresql_firewall_rule" "psqlfw" {
   name                = "office"
   resource_group_name = azurerm_resource_group.rg0123.name
   server_name         = azurerm_postgresql_server.psql.name
   start_ip_address    = "40.112.8.12"
   end_ip_address      = "40.112.8.12"
-}
+}*/
 
 
 
