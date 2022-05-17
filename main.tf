@@ -131,3 +131,39 @@ resource "azurerm_user_assigned_identity" "example" {
   name = join("-", [var.env, var.reg,"mi"])
 }
 
+
+resource "azurerm_postgresql_server" "psql" {
+  name                = join("",[var.env,var.reg,var.dom,"psql", var.index])
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg0123.name
+
+  sku_name = "B_Gen5_2"
+
+  storage_mb                   = 5120
+  backup_retention_days        = 7
+  geo_redundant_backup_enabled = false
+  auto_grow_enabled            = true
+
+  administrator_login          = var.adminlogin
+  administrator_login_password = var.loginpassword
+  version                      = "9.5"
+  ssl_enforcement_enabled      = true
+}
+
+resource "azurerm_postgresql_database" "psqldb" {
+  name                = join("",[var.env,var.reg,var.dom,"psqldb", var.index])
+  resource_group_name = azurerm_resource_group.rg0123.name
+  server_name         = azurerm_postgresql_server.psql.name
+  charset             = "UTF8"
+  collation           = "English_United States.1252"
+}
+resource "azurerm_postgresql_firewall_rule" "psqlfw" {
+  name                = "office"
+  resource_group_name = azurerm_resource_group.rg0123.name
+  server_name         = azurerm_postgresql_server.psql.name
+  start_ip_address    = "40.112.8.12"
+  end_ip_address      = "40.112.8.12"
+}
+
+
+
